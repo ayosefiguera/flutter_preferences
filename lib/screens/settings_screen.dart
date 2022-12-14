@@ -1,8 +1,10 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:preference/provider/theme_provider.dart';
 import 'package:preference/share_preference/preferences.dart';
 import 'package:preference/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const routerName = 'settings';
@@ -36,6 +38,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 value: Prefereces.isDarkMode,
                 onChanged: (value) {
                   Prefereces.isDarkMode = value;
+                  final themeProvider =
+                      Provider.of<ThemeProvider>(context, listen: false);
+                  value
+                      ? themeProvider.setDarktMode()
+                      : themeProvider.setLightMode();
                   setState(() {});
                 }),
             const Divider(),
