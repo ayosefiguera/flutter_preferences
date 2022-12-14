@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:preference/share_preference/preferences.dart';
 import 'package:preference/widgets/widgets.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -13,10 +14,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool isDarkMode = false;
-  int gender = 1;
-  String name = 'UserName';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,38 +33,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const Divider(),
             SwitchListTile.adaptive(
                 title: const Text('DarkMode'),
-                value: isDarkMode,
+                value: Prefereces.isDarkMode,
                 onChanged: (value) {
-                  isDarkMode = value;
+                  Prefereces.isDarkMode = value;
                   setState(() {});
                 }),
             const Divider(),
             RadioListTile<int>(
                 value: 1,
-                groupValue: gender,
+                groupValue: Prefereces.gender,
                 title: const Text('Male'),
                 onChanged: (value) {
-                  gender = value ?? 1;
+                  Prefereces.gender = value ?? 1;
                   setState(() {});
                 }),
             const Divider(),
             RadioListTile<int>(
                 value: 2,
-                groupValue: gender,
+                groupValue: Prefereces.gender,
                 title: const Text('Female'),
                 onChanged: (value) {
-                  gender = value ?? 2;
+                  Prefereces.gender = value ?? 2;
                   setState(() {});
                 }),
             const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TextFormField(
-                initialValue: 'Ayo',
+                initialValue: Prefereces.name,
                 decoration: const InputDecoration(
                     labelText: 'Name', helperText: 'User Name'),
                 onChanged: (value) {
-                  name = value;
+                  Prefereces.name = value;
                   setState(() {});
                 },
               ),

@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:preference/screens/screens.dart';
+import 'package:preference/share_preference/preferences.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  //Preferences.init return a future object, we need use async [main].
+  //we need the binding to be initialized before calling [runApp].
+  WidgetsFlutterBinding.ensureInitialized();
+  await Prefereces.init();
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
